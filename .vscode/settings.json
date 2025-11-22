@@ -8,5 +8,9 @@
   "prettier.requireConfig": true,
 
   "[typescript]": { "editor.formatOnSave": true },
-  "[typescriptreact]": { "editor.formatOnSave": true }
+  "[typescriptreact]": {
+    "editor.formatOnSave": true
+  },
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true
 }
