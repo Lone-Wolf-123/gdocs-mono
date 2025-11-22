@@ -1,0 +1,38 @@
+{
+  "name": "gdocs-mono",
+  "private": true,
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.23.0",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ],
+  "scripts": {
+    "bootstrap": "pnpm -w install",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^22.19.1",
+    "@typescript-eslint/eslint-plugin": "^8.46.4",
+    "@typescript-eslint/parser": "^8.46.4",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^5.2.2",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-jest": "29.2.0",
+    "globals": "^16.5.0",
+    "prettier": "^3.4.2",
+    "turbo": "^2.6.1",
+    "typescript": "^5.9.3"
+  }
+}

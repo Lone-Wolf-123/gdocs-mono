@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.app.json",
+  "include": ["src", "eslint.config.mjs"],
+  // "exclude": ["eslint.config.mjs"],
+  "compilerOptions": {
+    "allowJs": true,
+    "allowImportingTsExtensions": true
+  }
+}

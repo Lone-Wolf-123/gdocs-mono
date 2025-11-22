@@ -1,0 +1,20 @@
+{
+  "name": "@gdocs/shared",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+    "private": true,
+    "packageManager": "pnpm@10.23.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "./*": "./dist/*"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
