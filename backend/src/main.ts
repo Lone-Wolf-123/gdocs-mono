@@ -7,19 +7,19 @@ import { ValidationPipe } from '@nestjs/common';
 import type {} from '@prisma/client/runtime/library';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+	const app = await NestFactory.create(AppModule);
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
-    }),
-  );
+	app.useGlobalPipes(
+		new ValidationPipe({
+			whitelist: true,
+			forbidNonWhitelisted: true,
+			transform: true,
+		}),
+	);
 
-  const port = process.env.PORT || 3001;
+	const port = process.env.PORT || 3001;
 
-  await app.listen(port);
-  console.log(`🚀 Server running on http://localhost:${port}`);
+	await app.listen(port);
+	console.log(`🚀 Server running on http://localhost:${port}`);
 }
 void bootstrap();

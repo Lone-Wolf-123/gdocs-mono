@@ -5,8 +5,8 @@ import { DocsGateway } from './docs.gateway';
 import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
-  controllers: [DocsController],
-  providers: [DocsService, DocsGateway],
-  imports: [PrismaModule],
+	controllers: [DocsController],
+	providers: [DocsService, DocsGateway],
+	imports: [PrismaModule],
 })
 export class DocsModule {}
