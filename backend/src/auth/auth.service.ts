@@ -28,14 +28,18 @@ export class AuthService {
 		if (!user) throw new UnauthorizedException('Invalid credentials');
 
 		const valid = await bcrypt.compare(rawPassword, user.password);
-		if (!valid) throw new UnauthorizedException('Invalid credentials');
+		if (!valid)
+			throw new UnauthorizedException('Invalid credentials');
 
 		return this.createToken(user);
 	}
 
 	createToken(user: UserDTO) {
 		return {
-			access_token: this.jwt.sign({ sub: user.id, email: user.email }),
+			access_token: this.jwt.sign({
+				sub: user.id,
+				email: user.email,
+			}),
 			user: {
 				id: user.id,
 				email: user.email,

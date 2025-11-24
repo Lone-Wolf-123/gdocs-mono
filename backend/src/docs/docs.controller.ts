@@ -1,4 +1,8 @@
-import { CreateDocumentDTO, DocumentDTO, UpdateDocumentDTO } from '@gdocs/shared/document.dto.js';
+import {
+	CreateDocumentDTO,
+	DocumentDTO,
+	UpdateDocumentDTO,
+} from '@gdocs/shared/document.dto.js';
 import {
 	Body,
 	Controller,
@@ -25,14 +29,20 @@ export class DocsController {
 	}
 
 	@Get(':id')
-	async getOne(@Param('id') id: string, @Req() req): Promise<DocumentDTO> {
+	async getOne(
+		@Param('id') id: string,
+		@Req() req,
+	): Promise<DocumentDTO> {
 		const doc = await this.docsService.getOne(id, req.user.id);
 		if (!doc) throw new NotFoundException('Document not found');
 		return doc;
 	}
 
 	@Post()
-	async create(@Body() body: CreateDocumentDTO, @Req() req): Promise<DocumentDTO> {
+	async create(
+		@Body() body: CreateDocumentDTO,
+		@Req() req,
+	): Promise<DocumentDTO> {
 		const doc = await this.docsService.create(body, req.user.id);
 		if (!doc) throw new NotFoundException('Document not found');
 		return doc;

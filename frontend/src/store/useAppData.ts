@@ -1,6 +1,6 @@
 // useAppData.ts
-import {create} from 'zustand';
-import {persist} from 'zustand/middleware';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export const useAppDataStore = create(
 	persist(
@@ -8,7 +8,8 @@ export const useAppDataStore = create(
 			theme: 'dark',
 			userPreference: 'compact',
 			setTheme: (theme: string) => set({ theme }),
-			setUserPreference: (pref: string) => set({ userPreference: pref }),
+			setUserPreference: (pref: string) =>
+				set({ userPreference: pref }),
 		}),
 		{
 			name: 'app-data-storage', // unique name for localStorage key

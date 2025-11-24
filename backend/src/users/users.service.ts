@@ -10,14 +10,18 @@ export class UsersService {
 	constructor(private readonly prismaService: PrismaService) {}
 
 	async findByEmail(email: string): Promise<UserDTO | null> {
-		const user = await this.prismaService.user.findUnique({ where: { email } });
+		const user = await this.prismaService.user.findUnique({
+			where: { email },
+		});
 		return plainToInstance(UserDTO, user, {
 			excludeExtraneousValues: true,
 		});
 	}
 
 	async findById(id: string): Promise<UserDTO | null> {
-		const user = await this.prismaService.user.findUnique({ where: { id } });
+		const user = await this.prismaService.user.findUnique({
+			where: { id },
+		});
 		return plainToInstance(UserDTO, user, {
 			excludeExtraneousValues: true,
 		});

@@ -37,11 +37,17 @@ export class DocsGateway implements OnGatewayConnection {
 	}
 
 	@SubscribeMessage('joinDoc')
-	async handleJoin(@MessageBody() data: { docId: string }, @ConnectedSocket() client: Socket) {
+	async handleJoin(
+		@MessageBody() data: { docId: string },
+		@ConnectedSocket() client: Socket,
+	) {
 		const userId = client.data.userId;
 
 		// 1. Validate access
-		const doc = await this.docsService.findByIdForUser(data.docId, userId);
+		const doc = await this.docsService.findByIdForUser(
+			data.docId,
+			userId,
+		);
 		if (!doc) {
 			return { error: 'Forbidden' };
 		}
@@ -59,14 +65,20 @@ export class DocsGateway implements OnGatewayConnection {
 	) {
 		const userId = client.data.userId;
 
-		const updated = await this.docsService.update(data.docId, { content: data.content }, userId);
+		const updated = await this.docsService.update(
+			data.docId,
+			{ content: data.content },
+			userId,
+		);
 
 		this.server.to(data.docId).emit('docUpdated', updated);
 		return updated;
 	}
 
 	@SubscribeMessage('getDoc')
-	async getFullDoc(@MessageBody() docID: string): Promise<DocumentDTO | null> {
+	async getFullDoc(
+		@MessageBody() docID: string,
+	): Promise<DocumentDTO | null> {
 		return this.docsService.getOne(docID, 'TEMP_USER_ID');
 	}
 }

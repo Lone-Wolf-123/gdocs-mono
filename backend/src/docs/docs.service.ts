@@ -1,4 +1,8 @@
-import { CreateDocumentDTO, DocumentDTO, UpdateDocumentDTO } from '@gdocs/shared/document.dto.js';
+import {
+	CreateDocumentDTO,
+	DocumentDTO,
+	UpdateDocumentDTO,
+} from '@gdocs/shared/document.dto.js';
 import { Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { PrismaService } from '../prisma.service';
@@ -14,10 +18,17 @@ export class DocsService {
 
 		if (!docs || docs.length === 0) return [];
 
-		return docs.map((d) => plainToInstance(DocumentDTO, d, { excludeExtraneousValues: true }));
+		return docs.map((d) =>
+			plainToInstance(DocumentDTO, d, {
+				excludeExtraneousValues: true,
+			}),
+		);
 	}
 
-	async findByIdForUser(docId: string, userId: string): Promise<DocumentDTO | null> {
+	async findByIdForUser(
+		docId: string,
+		userId: string,
+	): Promise<DocumentDTO | null> {
 		const user = await this.prismaService.document.findFirst({
 			where: {
 				id: docId,
@@ -30,7 +41,10 @@ export class DocsService {
 		});
 	}
 
-	async getOne(id: string, userId: string): Promise<DocumentDTO | null> {
+	async getOne(
+		id: string,
+		userId: string,
+	): Promise<DocumentDTO | null> {
 		const doc = await this.prismaService.document.findFirst({
 			where: { id, authorId: userId },
 			include: { author: true },
@@ -43,7 +57,10 @@ export class DocsService {
 		});
 	}
 
-	async create(data: CreateDocumentDTO, userId: string): Promise<DocumentDTO> {
+	async create(
+		data: CreateDocumentDTO,
+		userId: string,
+	): Promise<DocumentDTO> {
 		const doc = await this.prismaService.document.create({
 			data: {
 				title: data.title,
@@ -57,7 +74,11 @@ export class DocsService {
 		});
 	}
 
-	async update(id: string, data: UpdateDocumentDTO, userId: string): Promise<DocumentDTO | null> {
+	async update(
+		id: string,
+		data: UpdateDocumentDTO,
+		userId: string,
+	): Promise<DocumentDTO | null> {
 		const existing = await this.prismaService.document.findFirst({
 			where: { id, authorId: userId },
 			include: { author: true },

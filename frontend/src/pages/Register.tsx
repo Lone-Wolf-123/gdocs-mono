@@ -1,14 +1,18 @@
 // /src/pages/Register.tsx
 
-import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-import {api} from '../lib/api';
-import {useAuth} from '../store/useAuth';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { api } from '../lib/api';
+import { useAuth } from '../store/useAuth';
 
 export default function Register() {
 	const navigate = useNavigate();
 	const setToken = useAuth((s) => s.setToken);
-	const [form, setForm] = useState({ email: '', password: '', name: '' });
+	const [form, setForm] = useState({
+		email: '',
+		password: '',
+		name: '',
+	});
 
 	// Function to handle changes in input fields
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -42,7 +46,13 @@ export default function Register() {
 				onChange={handleChange}
 				placeholder="Password"
 			/>
-			<input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Name" />
+			<input
+				type="text"
+				name="name"
+				value={form.name}
+				onChange={handleChange}
+				placeholder="Name"
+			/>
 			<button type="submit">Register</button>
 		</form>
 	);

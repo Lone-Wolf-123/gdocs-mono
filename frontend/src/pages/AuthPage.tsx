@@ -1,12 +1,16 @@
 // /src/pages/AuthPage.tsx
 //<Route path="/login" element={<AuthPage mode="login" />} />
 
-import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-import {api} from '../lib/api';
-import {useAuth} from '../store/useAuth';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { api } from '../lib/api';
+import { useAuth } from '../store/useAuth';
 
-export default function AuthPage({ mode }: { mode: 'login' | 'register' }) {
+export default function AuthPage({
+	mode,
+}: {
+	mode: 'login' | 'register';
+}) {
 	const navigate = useNavigate();
 	const setToken = useAuth((s) => s.setToken);
 
@@ -27,8 +31,12 @@ export default function AuthPage({ mode }: { mode: 'login' | 'register' }) {
 	async function submit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
-		const endpoint = mode === 'register' ? '/auth/register' : '/auth/login';
-		const payload = mode === 'register' ? form : { email: form.email, password: form.password };
+		const endpoint =
+			mode === 'register' ? '/auth/register' : '/auth/login';
+		const payload =
+			mode === 'register'
+				? form
+				: { email: form.email, password: form.password };
 
 		const res = await api.post(endpoint, payload);
 		setToken(res.data.token);
@@ -39,14 +47,29 @@ export default function AuthPage({ mode }: { mode: 'login' | 'register' }) {
 	return (
 		<form onSubmit={submit}>
 			{mode === 'register' && (
-				<input placeholder="Name" value={form.name} onChange={handleInputs} />
+				<input
+					placeholder="Name"
+					value={form.name}
+					onChange={handleInputs}
+				/>
 			)}
 
-			<input placeholder="Email" value={form.email} onChange={handleInputs} />
+			<input
+				placeholder="Email"
+				value={form.email}
+				onChange={handleInputs}
+			/>
 
-			<input type="password" placeholder="Password" value={form.password} onChange={handleInputs} />
+			<input
+				type="password"
+				placeholder="Password"
+				value={form.password}
+				onChange={handleInputs}
+			/>
 
-			<button type="submit">{mode === 'register' ? 'Create Account' : 'Login'}</button>
+			<button type="submit">
+				{mode === 'register' ? 'Create Account' : 'Login'}
+			</button>
 		</form>
 	);
 }
