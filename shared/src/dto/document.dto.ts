@@ -1,6 +1,6 @@
 // share/dto/document.dto.ts
+import { Expose, Type } from 'class-transformer';
 import { UserDTO } from './user.dto';
-import { Type, Expose } from 'class-transformer';
 
 export class DocumentDTO {
   @Expose() id!: string;

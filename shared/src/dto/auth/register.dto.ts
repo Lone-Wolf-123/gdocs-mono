@@ -1,14 +1,8 @@
-import { IsEmail, IsString, IsOptional, MinLength } from 'class-validator';
+import { Expose } from 'class-transformer';
+import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
 
 export class RegisterDTO {
-	@IsEmail()
-	email!: string;
-
-	@MinLength(6)
-	@IsString()
-	password!: string;
-
-	@IsOptional()
-	@IsString()
-	name?: string;
+	@Expose() @IsEmail() email!: string;
+	@Expose() @MinLength(6) @IsString() password!: string;
+	@Expose() @IsOptional() @IsString() name?: string;
 }

@@ -1,17 +1,17 @@
+import { CreateDocumentDTO, DocumentDTO, UpdateDocumentDTO } from '@gdocs/shared/document.dto.js';
 import {
+	Body,
 	Controller,
 	Get,
-	Post,
-	Patch,
-	Param,
-	Body,
-	Req,
 	NotFoundException,
+	Param,
+	Patch,
+	Post,
+	Req,
 	UseGuards,
 } from '@nestjs/common';
-import { DocsService } from './docs.service';
-import { CreateDocumentDTO, DocumentDTO, UpdateDocumentDTO } from '@gdocs/shared/document.dto.js';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { DocsService } from './docs.service';
 
 @Controller('docs')
 @UseGuards(JwtAuthGuard)
@@ -21,8 +21,6 @@ export class DocsController {
 	@Get()
 	async findAll(@Req() req): Promise<DocumentDTO[]> {
 		const docs = await this.docsService.findAll(req.user.id);
-		if (!docs || docs.length === 1) return [];
-
 		return docs;
 	}
 

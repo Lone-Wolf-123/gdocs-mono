@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
 import { CreateDocumentDTO, DocumentDTO, UpdateDocumentDTO } from '@gdocs/shared/document.dto.js';
-import { PrismaService } from '../prisma.service';
+import { Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
+import { PrismaService } from '../prisma.service';
 
 @Injectable()
 export class DocsService {
@@ -15,6 +15,19 @@ export class DocsService {
 		if (!docs || docs.length === 0) return [];
 
 		return docs.map((d) => plainToInstance(DocumentDTO, d, { excludeExtraneousValues: true }));
+	}
+
+	async findByIdForUser(docId: string, userId: string): Promise<DocumentDTO | null> {
+		const user = await this.prismaService.document.findFirst({
+			where: {
+				id: docId,
+				authorId: userId,
+			},
+			include: { author: true },
+		});
+		return plainToInstance(DocumentDTO, user, {
+			excludeExtraneousValues: true,
+		});
 	}
 
 	async getOne(id: string, userId: string): Promise<DocumentDTO | null> {
@@ -45,6 +58,13 @@ export class DocsService {
 	}
 
 	async update(id: string, data: UpdateDocumentDTO, userId: string): Promise<DocumentDTO | null> {
+		const existing = await this.prismaService.document.findFirst({
+			where: { id, authorId: userId },
+			include: { author: true },
+		});
+
+		if (!existing) return null; // unauthorized or not found
+
 		const doc = await this.prismaService.document
 			.update({
 				where: { id },

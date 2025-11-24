@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { DocsController } from './docs.controller';
-import { DocsService } from './docs.service';
-import { DocsGateway } from './docs.gateway';
 import { PrismaModule } from 'src/prisma/prisma.module';
+import { DocsController } from './docs.controller';
+import { DocsGateway } from './docs.gateway';
+import { DocsService } from './docs.service';
 
 @Module({
 	controllers: [DocsController],

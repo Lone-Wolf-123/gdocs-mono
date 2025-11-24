@@ -1,16 +1,18 @@
 {
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true,
+	"editor.formatOnType": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": "always"
+	},
+	"[typescript]": { "editor.formatOnSave": true },
+	"[typescriptreact]": {
+		"editor.formatOnSave": true
+	},
 
-  "eslint.validate": ["javascript", "typescript", "typescriptreact"],
-  "eslint.useFlatConfig": true,
+	"prettier.requireConfig": true,
 
-  "prettier.requireConfig": true,
-
-  "[typescript]": { "editor.formatOnSave": true },
-  "[typescriptreact]": {
-    "editor.formatOnSave": true
-  },
-  "editor.formatOnPaste": true,
-  "editor.formatOnType": true
+	"eslint.validate": ["javascript", "typescript", "typescriptreact"],
+	"eslint.useFlatConfig": true
 }
